@@ -35,5 +35,5 @@ describe history '/user/hive/warehouse/compras'
 #verificando quantos registros é a diferença da versao atual para a versão 3
 
 %sql 
-select count(distinct ID) - (select coubt(distinct ID) from compras version as of 3 ) as 'diferenca de registros'
+select count(distinct ID) - (select count(distinct ID) from compras version as of 3 ) as 'diferenca de registros'
 from compras
