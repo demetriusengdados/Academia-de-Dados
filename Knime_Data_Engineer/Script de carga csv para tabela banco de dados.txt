@@ -1,0 +1,4 @@
+COPY stg_departamento FROM 'C:/Temp/Knime/Entrada/Departamento.csv' DELIMITER ';' CSV HEADER ENCODING 'LATIN1';
+COPY stg_produto FROM 'C:/Temp/Knime/Entrada/Produto.csv' DELIMITER ';' CSV HEADER ENCODING 'LATIN1';
+COPY stg_vendedor FROM 'C:/Temp/Knime/Entrada/Vendedor.csv' DELIMITER ';' CSV HEADER ENCODING 'LATIN1';
+COPY stg_venda FROM 'C:/Temp/Knime/Entrada/Venda.csv' DELIMITER ';' CSV HEADER ENCODING 'LATIN1';
