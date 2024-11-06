@@ -1,0 +1,88 @@
+{
+    "name": "biz_biz_senai_monitoramento_unimercado_erro",
+    "properties": {
+        "description": "Pipeline que obtém as tabelas relacionadas ao orçamento e educação para obter uma das saídas do Desempenho, Resultados_Gratuidade",
+        "activities": [
+            {
+                "name": "biz_biz_senai_monitoramento",
+                "description": "pipeline de trs_biz para o resultados_gratuidade",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "policy": {
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "business__0__switch_env",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "env": {
+                            "value": "@pipeline().parameters.env",
+                            "type": "Expression"
+                        },
+                        "table": {
+                            "value": "@pipeline().parameters.tables",
+                            "type": "Expression"
+                        },
+                        "adf": {
+                            "value": "@json(concat('{\"adf_factory_name\": \"', pipeline().DataFactory, '\", \"adf_pipeline_name\": \"', pipeline().Pipeline, '\", \"adf_pipeline_run_id\": \"', pipeline().RunId, '\",  \"adf_trigger_id\": \"', pipeline().TriggerId, '\", \"adf_trigger_name\": \"', pipeline().TriggerName, '\", \"adf_trigger_time\": \"', pipeline().TriggerTime, '\",  \"adf_trigger_type\": \"', pipeline().TriggerType, '\"}'))",
+                            "type": "Expression"
+                        },
+                        "user_parameters": {
+                            "value": "@pipeline().parameters.user_parameters",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            }
+        ],
+        "parameters": {
+            "tables": {
+                "type": "object",
+                "defaultValue": {
+                    "origens": [
+                        "/producao/base_unimercado_ep"
+                    ],
+                    "destination": "/sesi/desempenho/monitoramento/sesi_monitoramento_producao",
+                    "databricks": {
+                        "notebook": "/biz/sesi/producao/biz_biz_sesi_monitoramento_producao"
+                    },
+                    "monitoramento": {
+                        "id": "103",
+                        "evento": "Base Unimercado",
+                        "filtro_datas": [
+                            "null",
+                            "null",
+                            "data_versao"
+                        ],
+                        "campo_versao": "versao_sistema",
+                        "entidade": "SENAI",
+                        "status": "2"
+                    }
+                }
+            },
+            "user_parameters": {
+                "type": "object",
+                "defaultValue": {
+                    "closing": {
+                        "year": "null",
+                        "month": "null"
+                    }
+                }
+            },
+            "env": {
+                "type": "object",
+                "defaultValue": {
+                    "env": "dev"
+                }
+            }
+        },
+        "folder": {
+            "name": "biz/senai/monitoramento/erro"
+        },
+        "annotations": []
+    }
+}
